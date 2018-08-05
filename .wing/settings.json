@@ -3,5 +3,6 @@
 		"**/bin-debug": true,
 		"**/bin-release": true
 	},
-    "git.path": "D:\\Program Files\\Git\\cmd\\git.exe"
+    "git.path": "D:\\Program Files\\Git\\cmd\\git.exe",
+    "editor.wordWrap": true
 }

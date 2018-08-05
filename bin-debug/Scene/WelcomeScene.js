@@ -18,7 +18,6 @@ var WelcomeScene = (function (_super) {
     WelcomeScene.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);
         this._init();
-        this.button.width = 200;
     };
     WelcomeScene.prototype._init = function () {
         this._initView();
@@ -34,43 +33,33 @@ var WelcomeScene = (function (_super) {
         }, this.startGameButton);
     };
     WelcomeScene.prototype._createInfo = function () {
-        var title = new eui.Label('砍树不好');
-        title.width = Const.WIDTH;
-        title.height = 80;
-        title.size = 40;
-        title.bold = true;
-        title.y = 100;
-        // title.textColor = 0xc57800;
-        title.textColor = 0xffffff;
-        title.textAlign = egret.HorizontalAlign.CENTER;
-        this.group.addChild(title);
-        var imageIcon = Utils.createBitmapByName('icon_jpg');
-        imageIcon.width = 200;
-        imageIcon.height = 200;
-        imageIcon.anchorOffsetX = imageIcon.width / 2;
-        imageIcon.anchorOffsetY = imageIcon.height / 2;
-        imageIcon.x = Const.WIDTH / 2;
-        imageIcon.y = 350;
-        this.group.addChild(imageIcon);
+        var titleImg = new eui.Image();
+        titleImg.texture = RES.getRes('title_png');
+        titleImg.width = 690;
+        titleImg.height = 323;
+        titleImg.x = (Const.WIDTH - titleImg.width) / 2;
+        titleImg.y = 393;
+        this.group.addChild(titleImg);
         var copyright = new eui.Label('网站中心版权所有');
         copyright.width = Const.WIDTH;
         copyright.height = 45;
         copyright.textColor = 0xffffff;
-        copyright.size = 12;
+        copyright.size = 40;
         copyright.x = 10;
         copyright.textAlign = egret.HorizontalAlign.CENTER;
-        copyright.y = Const.HEIGHT - 22;
+        copyright.y = Const.HEIGHT - 100;
         this.group.addChild(copyright);
     };
     WelcomeScene.prototype._createButton = function () {
         this.startGameButton = new eui.Button;
-        this.startGameButton.label = '开始游戏';
-        this.startGameButton.width = Const.WIDTH / 2;
-        this.startGameButton.height = 50;
-        this.startGameButton.x = Const.WIDTH / 2;
-        this.startGameButton.y = Const.HEIGHT - 300;
+        console.log(this.startGameButton);
+        this.startGameButton.skinName = 'resource/skin/button/ButtonPlay.exml';
+        this.startGameButton.width = 194;
+        this.startGameButton.height = 196;
         this.startGameButton.anchorOffsetX = this.startGameButton.width / 2;
         this.startGameButton.anchorOffsetY = this.startGameButton.height / 2;
+        this.startGameButton.x = (Const.WIDTH - this.startGameButton.width) / 2 + this.startGameButton.width / 2;
+        this.startGameButton.y = Const.HEIGHT - 421 + this.startGameButton.height / 2;
         this.group.addChild(this.startGameButton);
         UIUtils.addButtonScaleEffects(this.startGameButton);
     };

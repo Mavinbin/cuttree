@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="WelcomeSkin" width="640" height="1136" xmlns:e="http://ns.egret.com/eui"
+<e:Skin class="WelcomeSkin" width="1080" height="1920" xmlns:e="http://ns.egret.com/eui"
         xmlns:w="http://ns.egret.com/wing">
-	<w:Config id="1650a9a3a24"/>
-    <e:Group id="bgStart" width="640" height="1136">
-        <e:Image id="bgImg" width="640" height="1136"  source="bg_start_jpg"/>
-			<e:Image width="408.23" height="191.38" x="115.89" y="230" source="title_png" anchorOffsetX="0" anchorOffsetY="0"/>
-
+    <w:Config id="1650a9a3a24" />
+    <e:Group id="group" width="1080" height="1920">
+        <e:Image id="bgImg" width="1080" height="1920" source="bg_start_jpg" left="0" right="0" top="0" bottom="0"/>
     </e:Group>
 </e:Skin>

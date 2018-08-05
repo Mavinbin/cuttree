@@ -87,17 +87,16 @@ var Main = (function (_super) {
         egret.lifecycle.onResume = function () {
             egret.ticker.resume();
         };
-        if (egret.Capabilities.isMobile) {
-            console.log(egret.Capabilities.boundingClientHeight / egret.Capabilities.boundingClientWidth);
-            if (egret.Capabilities.boundingClientHeight / egret.Capabilities.boundingClientWidth < 1.610) {
-                this.stage.setContentSize(640, 1000);
-                this.stage.scaleMode = egret.StageScaleMode.FIXED_HEIGHT;
-            }
-            else {
-                this.stage.scaleMode = egret.StageScaleMode.SHOW_ALL;
-                this.stage.orientation = "auto";
-            }
-        }
+        // if (egret.Capabilities.isMobile) {
+        //     console.log(egret.Capabilities.boundingClientHeight / egret.Capabilities.boundingClientWidth);
+        //     if (egret.Capabilities.boundingClientHeight / egret.Capabilities.boundingClientWidth < 1.610) {
+        //         // this.stage.setContentSize(640, 1000);
+        //         this.stage.scaleMode = egret.StageScaleMode.FIXED_HEIGHT;
+        //     } else {
+        //         this.stage.scaleMode = egret.StageScaleMode.SHOW_ALL;
+        //         this.stage.orientation = "auto"
+        //     }
+        // }
         //inject the custom material parser
         //注入自定义的素材解析器
         var assetAdapter = new AssetAdapter();

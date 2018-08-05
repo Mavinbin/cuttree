@@ -3,7 +3,5 @@
 		"**/bin-debug": true,
 		"**/bin-release": true
 	},
-    "git.enabled": false,
-    "git.autorefresh": false,
-    "git.autofetch": false
+    "git.path": "D:\\Program Files\\Git\\cmd\\git.exe"
 }

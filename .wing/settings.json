@@ -1,0 +1,9 @@
+{
+	"search.exclude": {
+		"**/bin-debug": true,
+		"**/bin-release": true
+	},
+    "git.enabled": false,
+    "git.autorefresh": false,
+    "git.autofetch": false
+}

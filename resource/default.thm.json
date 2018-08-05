@@ -1,0 +1,11 @@
+{
+	"skins": {
+		"eui.Button": "resource/skin/ButtonSkin.exml"
+	},
+	"autoGenerateExmlsList": true,
+	"exmls": [
+		"resource/skin/ButtonSkin.exml",
+		"resource/skin/scene/WelcomeScene.exml"
+	],
+	"path": "resource/default.thm.json"
+}

@@ -1,0 +1,109 @@
+{
+	"groups": [
+		{
+			"keys": "button_down_png,button_up_png,icon_jpg,bg_start_jpg,title_png,timebar_wrap_png,timebar_inner_png,panel_result_png,branch_left_png,branch_right_png,wood_png,bg_main_png,trunk_png,btn_left_png,btn_pasue_png,btn_play_png,btn_rank_png,btn_resume_png,btn_right_png",
+			"name": "preload"
+		},
+		{
+			"keys": "",
+			"name": "main"
+		}
+	],
+	"resources": [
+		{
+			"url": "assets/Button/button_down.png",
+			"type": "image",
+			"name": "button_down_png"
+		},
+		{
+			"url": "assets/Button/button_up.png",
+			"type": "image",
+			"name": "button_up_png"
+		},
+		{
+			"url": "assets/icon.jpg",
+			"type": "image",
+			"name": "icon_jpg"
+		},
+		{
+			"url": "assets/bg_start.jpg",
+			"type": "image",
+			"name": "bg_start_jpg"
+		},
+		{
+			"name": "title_png",
+			"type": "image",
+			"url": "assets/title.png"
+		},
+		{
+			"name": "timebar_wrap_png",
+			"type": "image",
+			"url": "assets/timebar_wrap.png"
+		},
+		{
+			"name": "timebar_inner_png",
+			"type": "image",
+			"url": "assets/timebar_inner.png"
+		},
+		{
+			"name": "panel_result_png",
+			"type": "image",
+			"url": "assets/panel_result.png"
+		},
+		{
+			"name": "branch_left_png",
+			"type": "image",
+			"url": "assets/branch_left.png"
+		},
+		{
+			"name": "branch_right_png",
+			"type": "image",
+			"url": "assets/branch_right.png"
+		},
+		{
+			"name": "wood_png",
+			"type": "image",
+			"url": "assets/wood.png"
+		},
+		{
+			"name": "bg_main_png",
+			"type": "image",
+			"url": "assets/bg_main.png"
+		},
+		{
+			"name": "trunk_png",
+			"type": "image",
+			"url": "assets/trunk.png"
+		},
+		{
+			"name": "btn_left_png",
+			"type": "image",
+			"url": "assets/Button/btn_left.png"
+		},
+		{
+			"name": "btn_pasue_png",
+			"type": "image",
+			"url": "assets/Button/btn_pasue.png"
+		},
+		{
+			"name": "btn_play_png",
+			"type": "image",
+			"url": "assets/Button/btn_play.png"
+		},
+		{
+			"name": "btn_rank_png",
+			"type": "image",
+			"url": "assets/Button/btn_rank.png"
+		},
+		{
+			"name": "btn_resume_png",
+			"type": "image",
+			"url": "assets/Button/btn_resume.png"
+		},
+		{
+			"name": "btn_right_png",
+			"type": "image",
+			"url": "assets/Button/btn_right.png"
+		}
+	]
+}

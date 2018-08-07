@@ -1,14 +1,19 @@
 
 class GameScene extends SceneBase {
-  public tree: eui.Rect;
+  public tree: eui.Image;
   public cutter: eui.Rect;
   public ScoreLabel: eui.Label;
   public timeBar: eui.Rect;
   public levelLabel: eui.Label;
   public overPanel: PanelGameOver;
   public branchs: Array<eui.Rect> = [];
+  public constructor() {
+    super();
+    this.skinName = new GameSkin();
+    console.log(this.skinName)
+  }
 
-  // 游戏书否暂停
+  // 游戏是否暂停
   public timer: egret.Tween;
   public isPause: boolean = false;
   public score: number; // 分数
@@ -45,7 +50,6 @@ class GameScene extends SceneBase {
   //初始化界面
   private label: eui.Label;
   private _initView() {
-    this._initBg()
     this._createCutter();
     this._createTree();
     this._initBranch();
@@ -65,6 +69,8 @@ class GameScene extends SceneBase {
   // 初始化时间条
   private _initTimeBar() {
     if (!this.timeBar) {
+
+
       this.timeBar = new eui.Rect();
       this.timeBar.width = this.curLong;
       this.timeBar.anchorOffsetX = this.timeBar.width / 2;
@@ -79,17 +85,11 @@ class GameScene extends SceneBase {
     this.timeBar.width = this.curLong;
   }
 
-  // 初始化背景
-  private _initBg() {
-    const rect = new eui.Rect(Const.WIDTH, Const.HEIGHT, 0xe4d9c7);
-    this.addChild(rect);
-  }
-
   // 初始化树枝
   private _createTree() {
-    this.tree = new eui.Rect(200, Const.HEIGHT - 200, 0x777575);
-    this.tree.anchorOffsetX = 100;
-    this.tree.x = Const.WIDTH / 2;
+    this.tree = new eui.Image();
+    this.tree.texture = RES.getRes('trunk_png');
+    this.tree.x = (Const.WIDTH - this.tree.width) / 2;
     this.addChild(this.tree)
   }
 
@@ -172,7 +172,7 @@ class GameScene extends SceneBase {
     this.timer.to({
       width: 0
     }, this.curTime * 1000).call(() => {
-      this.gameOver();
+      // this.gameOver();
     });
   }
 

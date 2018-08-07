@@ -52,7 +52,6 @@ var WelcomeScene = (function (_super) {
     };
     WelcomeScene.prototype._createButton = function () {
         this.startGameButton = new eui.Button;
-        console.log(this.startGameButton);
         this.startGameButton.skinName = 'resource/skin/button/ButtonPlay.exml';
         this.startGameButton.width = 194;
         this.startGameButton.height = 196;

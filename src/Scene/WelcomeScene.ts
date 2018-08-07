@@ -50,7 +50,6 @@ class WelcomeScene extends SceneBase {
 
     private _createButton() {
         this.startGameButton = new eui.Button;
-        console.log(this.startGameButton);
         this.startGameButton.skinName = 'resource/skin/button/ButtonPlay.exml';
         this.startGameButton.width = 194;
         this.startGameButton.height = 196;

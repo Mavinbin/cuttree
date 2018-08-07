@@ -11,10 +11,12 @@ r.prototype = e.prototype, t.prototype = new r();
 var GameScene = (function (_super) {
     __extends(GameScene, _super);
     function GameScene() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super.call(this) || this;
         _this.branchs = [];
         _this.isPause = false;
         _this._curTime = 0;
+        _this.skinName = new GameSkin();
+        console.log(_this.skinName);
         return _this;
     }
     // 创建子元素
@@ -41,7 +43,6 @@ var GameScene = (function (_super) {
         this.timer = null;
     };
     GameScene.prototype._initView = function () {
-        this._initBg();
         this._createCutter();
         this._createTree();
         this._initBranch();
@@ -72,16 +73,14 @@ var GameScene = (function (_super) {
         }
         this.timeBar.width = this.curLong;
     };
-    // 初始化背景
-    GameScene.prototype._initBg = function () {
-        var rect = new eui.Rect(Const.WIDTH, Const.HEIGHT, 0xe4d9c7);
-        this.addChild(rect);
-    };
     // 初始化树枝
     GameScene.prototype._createTree = function () {
-        this.tree = new eui.Rect(200, Const.HEIGHT - 200, 0x777575);
-        this.tree.anchorOffsetX = 100;
-        this.tree.x = Const.WIDTH / 2;
+        // this.tree = new TrunkSkin();
+        this.tree = new eui.Image();
+        // this.tree = new eui.Rect(200, Const.HEIGHT - 200, 0x777575);
+        this.tree.texture = RES.getRes('trunk_png');
+        // this.tree.anchorOffsetX = 100;
+        this.tree.x = (Const.WIDTH - this.tree.width) / 2;
         this.addChild(this.tree);
     };
     GameScene.prototype._createScore = function () {
@@ -149,7 +148,6 @@ var GameScene = (function (_super) {
     };
     //初始化时间条
     GameScene.prototype._createTimerEvent = function () {
-        var _this = this;
         if (this.timer) {
             this.timer.setPaused(true);
             this.timer = null;
@@ -158,7 +156,7 @@ var GameScene = (function (_super) {
         this.timer.to({
             width: 0
         }, this.curTime * 1000).call(function () {
-            _this.gameOver();
+            // this.gameOver();
         });
     };
     // 砍树事件处理

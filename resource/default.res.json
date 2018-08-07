@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "button_down_png,button_up_png,icon_jpg,bg_start_jpg,title_png,timebar_wrap_png,timebar_inner_png,panel_result_png,branch_left_png,branch_right_png,wood_png,bg_main_png,trunk_png,btn_left_png,btn_pasue_png,btn_play_png,btn_rank_png,btn_resume_png,btn_right_png",
+			"keys": "button_down_png,button_up_png,btn_left_png,btn_pasue_png,btn_play_png,btn_rank_png,btn_resume_png,btn_right_png,bg_main_jpg,bg_start_jpg,branch_left_png,branch_right_png,wood_png,trunk_png,title_png,panel_result_png,timebar_inner_png,timebar_wrap_png,icon_jpg",
 			"name": "preload"
 		},
 		{
@@ -21,89 +21,89 @@
 			"name": "button_up_png"
 		},
 		{
-			"url": "assets/icon.jpg",
+			"url": "assets/Button/btn_left.png",
 			"type": "image",
-			"name": "icon_jpg"
+			"name": "btn_left_png"
 		},
 		{
-			"url": "assets/bg_start.jpg",
+			"url": "assets/Button/btn_pasue.png",
 			"type": "image",
-			"name": "bg_start_jpg"
+			"name": "btn_pasue_png"
 		},
 		{
-			"name": "title_png",
+			"url": "assets/Button/btn_play.png",
 			"type": "image",
-			"url": "assets/title.png"
+			"name": "btn_play_png"
 		},
 		{
-			"name": "timebar_wrap_png",
+			"url": "assets/Button/btn_rank.png",
 			"type": "image",
-			"url": "assets/timebar_wrap.png"
+			"name": "btn_rank_png"
 		},
 		{
-			"name": "timebar_inner_png",
+			"url": "assets/Button/btn_resume.png",
 			"type": "image",
-			"url": "assets/timebar_inner.png"
+			"name": "btn_resume_png"
 		},
 		{
-			"name": "panel_result_png",
+			"url": "assets/Button/btn_right.png",
 			"type": "image",
-			"url": "assets/panel_result.png"
+			"name": "btn_right_png"
+		},
+		{
+			"name": "bg_main_jpg",
+			"type": "image",
+			"url": "assets/layout/bg_main.jpg"
+		},
+		{
+			"name": "bg_start_jpg",
+			"type": "image",
+			"url": "assets/layout/bg_start.jpg"
 		},
 		{
 			"name": "branch_left_png",
 			"type": "image",
-			"url": "assets/branch_left.png"
+			"url": "assets/tree/branch_left.png"
 		},
 		{
 			"name": "branch_right_png",
 			"type": "image",
-			"url": "assets/branch_right.png"
+			"url": "assets/tree/branch_right.png"
 		},
 		{
 			"name": "wood_png",
 			"type": "image",
-			"url": "assets/wood.png"
-		},
-		{
-			"name": "bg_main_png",
-			"type": "image",
-			"url": "assets/bg_main.png"
+			"url": "assets/tree/wood.png"
 		},
 		{
 			"name": "trunk_png",
 			"type": "image",
-			"url": "assets/trunk.png"
+			"url": "assets/tree/trunk.png"
 		},
 		{
-			"name": "btn_left_png",
+			"name": "title_png",
 			"type": "image",
-			"url": "assets/Button/btn_left.png"
+			"url": "assets/layout/title.png"
 		},
 		{
-			"name": "btn_pasue_png",
+			"name": "panel_result_png",
 			"type": "image",
-			"url": "assets/Button/btn_pasue.png"
+			"url": "assets/layout/panel_result.png"
 		},
 		{
-			"name": "btn_play_png",
+			"name": "timebar_inner_png",
 			"type": "image",
-			"url": "assets/Button/btn_play.png"
+			"url": "assets/layout/timebar_inner.png"
 		},
 		{
-			"name": "btn_rank_png",
+			"name": "timebar_wrap_png",
 			"type": "image",
-			"url": "assets/Button/btn_rank.png"
+			"url": "assets/layout/timebar_wrap.png"
 		},
 		{
-			"name": "btn_resume_png",
+			"name": "icon_jpg",
 			"type": "image",
-			"url": "assets/Button/btn_resume.png"
-		},
-		{
-			"name": "btn_right_png",
-			"type": "image",
-			"url": "assets/Button/btn_right.png"
+			"url": "assets/user/icon.jpg"
 		}
 	]
 }

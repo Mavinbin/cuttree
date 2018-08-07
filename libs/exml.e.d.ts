@@ -6,5 +6,9 @@ declare module skins{
 	class ButtonPlay extends eui.Skin{
 	}
 }
+declare class GameSkin extends eui.Skin{
+}
 declare class WelcomeSkin extends eui.Skin{
+}
+declare class TrunkSkin extends eui.Skin{
 }

@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "button_down_png,button_up_png,btn_left_png,btn_pasue_png,btn_play_png,btn_rank_png,btn_resume_png,btn_right_png,bg_main_jpg,bg_start_jpg,branch_left_png,branch_right_png,wood_png,trunk_png,title_png,panel_result_png,timebar_inner_png,timebar_wrap_png,icon_jpg",
+			"keys": "button_down_png,button_up_png,btn_left_png,btn_pasue_png,btn_play_png,btn_rank_png,btn_resume_png,btn_right_png,bg_main_jpg,bg_start_jpg,branch_left_png,branch_right_png,wood_png,trunk_png,title_png,timebar_inner_png,timebar_wrap_png,icon_jpg,cutter_json,cutter_png,panel_over_png",
 			"name": "preload"
 		},
 		{
@@ -86,11 +86,6 @@
 			"url": "assets/layout/title.png"
 		},
 		{
-			"name": "panel_result_png",
-			"type": "image",
-			"url": "assets/layout/panel_result.png"
-		},
-		{
 			"name": "timebar_inner_png",
 			"type": "image",
 			"url": "assets/layout/timebar_inner.png"
@@ -104,6 +99,21 @@
 			"name": "icon_jpg",
 			"type": "image",
 			"url": "assets/user/icon.jpg"
+		},
+		{
+			"name": "cutter_json",
+			"type": "json",
+			"url": "assets/animation/cutter.json"
+		},
+		{
+			"name": "cutter_png",
+			"type": "image",
+			"url": "assets/animation/cutter.png"
+		},
+		{
+			"name": "panel_over_png",
+			"type": "image",
+			"url": "assets/layout/panel_over.png"
 		}
 	]
 }

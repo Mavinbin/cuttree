@@ -16,7 +16,6 @@ var GameScene = (function (_super) {
         _this.isPause = false;
         _this._curTime = 0;
         _this.skinName = new GameSkin();
-        console.log(_this.skinName);
         return _this;
     }
     // 创建子元素
@@ -30,6 +29,7 @@ var GameScene = (function (_super) {
         this._initView();
         this._initEvent();
         this._start();
+        this.gameOver();
     };
     // 初始化数据
     GameScene.prototype._initData = function () {
@@ -43,8 +43,8 @@ var GameScene = (function (_super) {
         this.timer = null;
     };
     GameScene.prototype._initView = function () {
-        this._createCutter();
         this._createTree();
+        this._createCutter();
         this._initBranch();
         this._createScore();
         this._initTimeBar();
@@ -60,27 +60,35 @@ var GameScene = (function (_super) {
     // 初始化时间条
     GameScene.prototype._initTimeBar = function () {
         if (!this.timeBar) {
-            this.timeBar = new eui.Rect();
-            this.timeBar.width = this.curLong;
-            this.timeBar.anchorOffsetX = this.timeBar.width / 2;
-            this.timeBar.x = Const.WIDTH / 2;
-            this.timeBar.y = 50;
-            this.timeBar.height = 10;
-            this.timeBar.fillColor = 0x873284;
-            this.timeBar.ellipseWidth = 10;
-            this.timeBar.ellipseHeight = 10;
-            this.addChild(this.timeBar);
+            var timeBarGroup = new eui.Group();
+            var timeBarWrap = new eui.Image();
+            timeBarWrap.texture = RES.getRes('timebar_wrap_png');
+            timeBarGroup.top = 84;
+            timeBarGroup.left = (Const.WIDTH - timeBarWrap.width) / 2;
+            timeBarGroup.addChild(timeBarWrap);
+            var timeGroup = new eui.Group();
+            var timeBarMask = new egret.Shape();
+            this.timeBar = new eui.Image();
+            timeGroup.left = 14;
+            timeGroup.top = 10;
+            this.timeBar.texture = RES.getRes('timebar_inner_png');
+            timeBarMask.graphics.beginFill(0x000000);
+            timeBarMask.graphics.drawRoundRect(0, 0, this.timeBar.width, this.timeBar.height, this.timeBar.height, this.timeBar.height);
+            timeBarMask.graphics.endFill();
+            this.timeBar.mask = timeBarMask;
+            timeGroup.addChild(this.timeBar);
+            timeGroup.addChild(timeBarMask);
+            timeBarGroup.addChild(timeGroup);
+            this.addChild(timeBarGroup);
         }
-        this.timeBar.width = this.curLong;
     };
-    // 初始化树枝
+    // 初始化树干
     GameScene.prototype._createTree = function () {
-        // this.tree = new TrunkSkin();
         this.tree = new eui.Image();
-        // this.tree = new eui.Rect(200, Const.HEIGHT - 200, 0x777575);
         this.tree.texture = RES.getRes('trunk_png');
-        // this.tree.anchorOffsetX = 100;
         this.tree.x = (Const.WIDTH - this.tree.width) / 2;
+        var y = Const.HEIGHT * 0.88 - this.tree.height;
+        this.tree.y = y < 0 ? y : 0;
         this.addChild(this.tree);
     };
     GameScene.prototype._createScore = function () {
@@ -100,18 +108,30 @@ var GameScene = (function (_super) {
     };
     // 创建砍树人员
     GameScene.prototype._createCutter = function () {
-        this.cutter = new eui.Rect(120, 200, 0xffe30b);
-        this.cutter.y = Const.HEIGHT - this.cutter.height - 240;
-        this.cutter.x = 50;
+        var cutterData = RES.getRes('cutter_json');
+        var cutterImg = RES.getRes('cutter_png');
+        var mcFactory = new egret.MovieClipDataFactory(cutterData, cutterImg);
+        this.cutter = new egret.MovieClip(mcFactory.generateMovieClipData('cutter'));
         this.addChild(this.cutter);
+        this.cutter.gotoAndStop(1);
+        this.cutter.x = this.tree.x - this.cutter.width;
+        this.cutter.y = Const.HEIGHT * 0.88 - this.cutter.height;
     };
     // 获取一根树枝
     GameScene.prototype._getOneBranch = function (y, defaultRect) {
         if (y === void 0) { y = 0; }
-        var rect = defaultRect || new eui.Rect(150, 40, 0xf57f7f);
-        rect.x = Math.random() > 0.5 ? (Const.WIDTH / 2 - 100 - rect.width) : Const.WIDTH / 2 + 100;
-        rect.y = y;
-        return rect;
+        var branch = defaultRect || new eui.Image();
+        var random = Math.random();
+        if (random > 0.5) {
+            branch.texture = RES.getRes('branch_left_png');
+            branch.x = this.tree.x - branch.width + 100;
+        }
+        else {
+            branch.texture = RES.getRes('branch_right_png');
+            branch.x = this.tree.x + this.tree.width - 60;
+        }
+        branch.y = y;
+        return branch;
     };
     // 初始化树枝
     GameScene.prototype._initBranch = function () {
@@ -148,15 +168,16 @@ var GameScene = (function (_super) {
     };
     //初始化时间条
     GameScene.prototype._createTimerEvent = function () {
+        var _this = this;
         if (this.timer) {
             this.timer.setPaused(true);
             this.timer = null;
         }
         this.timer = egret.Tween.get(this.timeBar);
         this.timer.to({
-            width: 0
+            x: -this.timeBar.width
         }, this.curTime * 1000).call(function () {
-            // this.gameOver();
+            _this.gameOver();
         });
     };
     // 砍树事件处理
@@ -181,9 +202,9 @@ var GameScene = (function (_super) {
     //处理点击时时间增加相关
     GameScene.prototype._handleTimeAdd = function () {
         this.timer.setPaused(true);
-        var onclikAddDis = this.curLong / this.curTime / 6;
-        var TimeBarWidth = this.timeBar.width;
-        this.timeBar.width = TimeBarWidth + onclikAddDis > this.curLong ? this.curLong : TimeBarWidth + onclikAddDis;
+        var onclikAddDis = this.timeBar.width / this.curTime / 6;
+        var timeBarX = this.timeBar.x;
+        this.timeBar.x = timeBarX + onclikAddDis > 0 ? 0 : timeBarX + onclikAddDis;
         this._createTimerEvent();
     };
     //升级
@@ -220,47 +241,46 @@ var GameScene = (function (_super) {
     // 砍树人的动画处理
     GameScene.prototype.animationCutter = function (flag) {
         if (flag === void 0) { flag = false; }
-        var ratotion = 30;
-        if (flag)
-            ratotion = -30;
-        var tCutter = egret.Tween.get(this.cutter);
-        tCutter.wait(10);
-        tCutter.to({
-            rotation: ratotion
-        }, 30).to({
-            rotation: 0
-        }, 30);
+        if (flag) {
+            this.cutter.x = this.tree.x - this.cutter.width;
+            this.cutter.gotoAndPlay('cut_l', 1);
+        }
+        else {
+            this.cutter.x = this.tree.x + this.tree.width - 60;
+            this.cutter.gotoAndPlay('cut_r', 1);
+        }
         this._cutedTreeMove(flag);
     };
     // 被砍的树块生成与动画
     GameScene.prototype._cutedTreeMove = function (flag) {
         if (flag === void 0) { flag = false; }
-        var rect = new eui.Rect(this.tree.width, 150, 0x832466);
-        rect.anchorOffsetX = rect.width / 2;
-        rect.x = Const.WIDTH / 2;
-        rect.y = this.cutter.y + 20;
-        this.addChild(rect);
-        var tw = egret.Tween.get(rect);
+        var wood = new eui.Image();
+        wood.texture = RES.getRes('wood_png');
+        wood.anchorOffsetX = wood.width / 2;
+        wood.x = Const.WIDTH / 2;
+        wood.y = this.cutter.y + 20;
+        this.addChild(wood);
+        var tw = egret.Tween.get(wood);
         tw.to({
             rotation: flag ? 90 : -90,
-            x: flag ? Const.WIDTH + rect.width : -rect.width
-        }, 500).call(function () { rect = null; });
+            x: flag ? Const.WIDTH + wood.height : -wood.height
+        }, 500).call(function () { wood = null; });
         var lineRect = new eui.Rect(0, 2, 0xffffff);
-        lineRect.y = rect.y + rect.height;
-        lineRect.x = (Const.WIDTH - this.tree.width) / 2;
+        lineRect.y = Const.HEIGHT * 0.78;
+        lineRect.x = this.tree.x + 100;
         this.addChild(lineRect);
         var lintTw = egret.Tween.get(lineRect);
         if (flag) {
             lintTw.to({
-                width: this.tree.width,
+                width: this.tree.width - 160,
                 alpha: 0
             }, 200).call(function () { lineRect = null; });
         }
         else {
-            lineRect.x = (Const.WIDTH - this.tree.width) / 2 + this.tree.width / 2;
+            lineRect.x = this.tree.x + this.tree.width - 60;
             lintTw.to({
-                x: (Const.WIDTH - this.tree.width) / 2,
-                width: this.tree.width,
+                x: this.tree.x + 100,
+                width: this.tree.width - 160,
                 alpha: 0
             }, 200).call(function () { lineRect = null; });
         }
@@ -271,7 +291,6 @@ var GameScene = (function (_super) {
         var uuu = new Date().getTime();
         if (this._curTime) {
             var detTime = uuu - this._curTime;
-            console.log(detTime);
             this.label.text = detTime.toString();
         }
         this._curTime = uuu;
@@ -303,10 +322,11 @@ var GameScene = (function (_super) {
         var label = new eui.Label('游戏结束');
         label.width = this.cutter.width;
         label.textColor = 0xff0000;
-        this.cutter.addChild(label);
+        // this.cutter.addChild(label);
         // this.ScoreLabel.text = (--this.score).toString();
-        if (this.timer)
+        if (this.timer) {
             this.timer.setPaused(true);
+        }
         //设置最高分
         var MaxScore = Number(egret.localStorage.getItem('MAX_SCORE'));
         if (MaxScore < this.score)

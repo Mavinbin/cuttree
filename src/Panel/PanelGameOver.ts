@@ -15,79 +15,90 @@ class PanelGameOver extends PanelBase {
     }
 
     addChildren() {
+        
         //添加背景
-        let rect = new eui.Rect(Const.WIDTH, Const.HEIGHT, 0x000000);
-        rect.alpha = 0.6;
-        this.addChild(rect);
+        let mask = new eui.Rect(Const.WIDTH, Const.HEIGHT, 0x000000);
+        mask.alpha = 0.6;
+        this.addChild(mask);
 
         let popComponent = new eui.Component;
-        popComponent.width = Const.WIDTH - 200;
-        popComponent.height = Const.HEIGHT - 500;
-        popComponent.anchorOffsetX = popComponent.width / 2;
-        popComponent.x = Const.WIDTH / 2;
-        popComponent.y = 50;
         this.addChild(popComponent)
 
-        let gameoverLayer = new eui.Label('GAME OVER');
-        gameoverLayer.y = 70;
-        gameoverLayer.size = 70;
-        gameoverLayer.width = popComponent.width;
-        gameoverLayer.height = 70;
-        gameoverLayer.textAlign = egret.HorizontalAlign.CENTER;
+        let gameoverLayer = new eui.Image();
+        gameoverLayer.texture = RES.getRes('panel_over_png');
+        popComponent.width = gameoverLayer.width;
+        popComponent.height = gameoverLayer.height;
+        popComponent.x = (Const.WIDTH - gameoverLayer.width) / 2;
+        popComponent.y = Const.HEIGHT * 0.19;
         popComponent.addChild(gameoverLayer);
 
-        //本轮得分
-        let curLabelText = new eui.Label('本轮得分');
-        curLabelText.y = gameoverLayer.y + gameoverLayer.height + 60;
+        //本轮得分文字
+        let curLabelText = new eui.Label('本轮得分 ：');
+        curLabelText.x = 20;
+        curLabelText.y = 280;
         curLabelText.size = 40;
-        curLabelText.width = popComponent.width;
-        curLabelText.height = 40;
-        curLabelText.textAlign = egret.HorizontalAlign.CENTER;
+        curLabelText.width = popComponent.width / 2;
+        // curLabelText.height = 40;
+        curLabelText.textAlign = egret.HorizontalAlign.RIGHT;
+        curLabelText.fontFamily = "microsoft yahei";
+        curLabelText.stroke = 1;
+        curLabelText.strokeColor = 0x3a230a;
         popComponent.addChild(curLabelText);
 
 
-        // 真正得分
+        // 本轮得分分数
         this.curScore = new eui.Label;
         this.curScore.text = '190';
         this.curScore.bold = true;
-        this.curScore.y = curLabelText.y + curLabelText.height + 50;
+        this.curScore.x = popComponent.width / 2 + 10;
+        this.curScore.y = curLabelText.y;
         this.curScore.textColor = 0xff0000;
-        this.curScore.size = 35;
-        this.curScore.width = popComponent.width;
-        this.curScore.height = 35;
-        this.curScore.textAlign = egret.HorizontalAlign.CENTER;
+        this.curScore.size = 40;
+        this.curScore.width = popComponent.width / 2;
+        // this.curScore.height = 35;
+        this.curScore.textAlign = egret.HorizontalAlign.LEFT;
+        this.curScore.fontFamily = "microsoft yahei";
+        this.curScore.stroke = 1;
+        this.curScore.strokeColor = 0x3a230a;
         popComponent.addChild(this.curScore);
 
 
-        //最高得分
-        let maxLabelText = new eui.Label('最高得分');
-        maxLabelText.y = this.curScore.y + this.curScore.height + 60;
+        //最高得分文本
+        let maxLabelText = new eui.Label('最高得分 ：');
+        maxLabelText.x = 20;
+        maxLabelText.y = curLabelText.y + curLabelText.height + 60;
         maxLabelText.size = 40;
-        maxLabelText.width = popComponent.width;
-        maxLabelText.height = 40;
-        maxLabelText.textAlign = egret.HorizontalAlign.CENTER;
+        maxLabelText.width = popComponent.width / 2;
+        // maxLabelText.height = 40;
+        maxLabelText.textAlign = egret.HorizontalAlign.RIGHT;
+        maxLabelText.fontFamily = "microsoft yahei";
+        maxLabelText.stroke = 1;
+        maxLabelText.strokeColor = 0x3a230a;
         popComponent.addChild(maxLabelText);
 
-        // 真正得分
+        // 最高得分分数
         this.MaxScore = new eui.Label;
         this.MaxScore.text = '500';
         this.MaxScore.bold = true;
-        this.MaxScore.y = maxLabelText.y + maxLabelText.height + 50;
+        this.MaxScore.x = popComponent.width / 2 + 10;
+        this.MaxScore.y = maxLabelText.y;
         this.MaxScore.textColor = 0xff0000;
-        this.MaxScore.size = 35;
-        this.MaxScore.width = popComponent.width;
-        this.MaxScore.height = 35;
-        this.MaxScore.textAlign = egret.HorizontalAlign.CENTER;
+        this.MaxScore.size = 40;
+        this.MaxScore.width = popComponent.width / 2;
+        // this.MaxScore.height = 35;
+        this.MaxScore.textAlign = egret.HorizontalAlign.LEFT;
+        this.MaxScore.fontFamily = "microsoft yahei";
+        this.MaxScore.stroke = 1;
+        this.MaxScore.strokeColor = 0x3a230a;
         popComponent.addChild(this.MaxScore);
 
         //确定按钮
         this.confirmBtn = new eui.Button;
-        this.confirmBtn.label = '重新开始';
-        this.confirmBtn.width = popComponent.width - 100;
-        this.confirmBtn.height = 60;
+        this.confirmBtn.skinName = 'resource/skin/button/ButtonPlay.exml';
         this.confirmBtn.anchorOffsetX = this.confirmBtn.width / 2;
+        this.confirmBtn.anchorOffsetY = this.confirmBtn.height / 2;
         this.confirmBtn.x = popComponent.width / 2;
-        this.confirmBtn.y = this.MaxScore.y + this.MaxScore.height + 40;
+        this.confirmBtn.y = popComponent.height - 10;
         UIUtils.addButtonScaleEffects(this.confirmBtn);
         popComponent.addChild(this.confirmBtn);
     }

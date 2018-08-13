@@ -1,16 +1,15 @@
 
 class GameScene extends SceneBase {
   public tree: eui.Image;
-  public cutter: eui.Rect;
+  public cutter;
   public ScoreLabel: eui.Label;
-  public timeBar: eui.Rect;
+  public timeBar: eui.Image;
   public levelLabel: eui.Label;
   public overPanel: PanelGameOver;
-  public branchs: Array<eui.Rect> = [];
+  public branchs: Array<eui.Image> = [];
   public constructor() {
     super();
     this.skinName = new GameSkin();
-    console.log(this.skinName)
   }
 
   // 游戏是否暂停
@@ -33,6 +32,7 @@ class GameScene extends SceneBase {
     this._initView();
     this._initEvent();
     this._start();
+    this.gameOver();
   }
 
 
@@ -50,8 +50,8 @@ class GameScene extends SceneBase {
   //初始化界面
   private label: eui.Label;
   private _initView() {
-    this._createCutter();
     this._createTree();
+    this._createCutter();
     this._initBranch();
     this._createScore();
     this._initTimeBar();
@@ -69,28 +69,37 @@ class GameScene extends SceneBase {
   // 初始化时间条
   private _initTimeBar() {
     if (!this.timeBar) {
-
-
-      this.timeBar = new eui.Rect();
-      this.timeBar.width = this.curLong;
-      this.timeBar.anchorOffsetX = this.timeBar.width / 2;
-      this.timeBar.x = Const.WIDTH / 2;
-      this.timeBar.y = 50;
-      this.timeBar.height = 10;
-      this.timeBar.fillColor = 0x873284;
-      this.timeBar.ellipseWidth = 10;
-      this.timeBar.ellipseHeight = 10;
-      this.addChild(this.timeBar);
+      let timeBarGroup = new eui.Group();
+      let timeBarWrap = new eui.Image();
+      timeBarWrap.texture = RES.getRes('timebar_wrap_png');
+      timeBarGroup.top = 84;
+      timeBarGroup.left = (Const.WIDTH - timeBarWrap.width) / 2;
+      timeBarGroup.addChild(timeBarWrap);
+      let timeGroup = new eui.Group();
+      let timeBarMask = new egret.Shape();
+      this.timeBar = new eui.Image();
+      timeGroup.left = 14;
+      timeGroup.top = 10;
+      this.timeBar.texture = RES.getRes('timebar_inner_png');
+      timeBarMask.graphics.beginFill(0x000000);
+      timeBarMask.graphics.drawRoundRect(0, 0, this.timeBar.width, this.timeBar.height, this.timeBar.height, this.timeBar.height);
+      timeBarMask.graphics.endFill();
+      this.timeBar.mask = timeBarMask;
+      timeGroup.addChild(this.timeBar);
+      timeGroup.addChild(timeBarMask);
+      timeBarGroup.addChild(timeGroup);
+      this.addChild(timeBarGroup);
     }
-    this.timeBar.width = this.curLong;
   }
 
-  // 初始化树枝
+  // 初始化树干
   private _createTree() {
     this.tree = new eui.Image();
     this.tree.texture = RES.getRes('trunk_png');
     this.tree.x = (Const.WIDTH - this.tree.width) / 2;
-    this.addChild(this.tree)
+    const y = Const.HEIGHT * 0.88 - this.tree.height;
+    this.tree.y = y < 0 ? y : 0;
+    this.addChild(this.tree);
   }
 
   private _createScore() {
@@ -111,18 +120,30 @@ class GameScene extends SceneBase {
 
   // 创建砍树人员
   private _createCutter() {
-    this.cutter = new eui.Rect(120, 200, 0xffe30b);
-    this.cutter.y = Const.HEIGHT - this.cutter.height - 240;
-    this.cutter.x = 50;
+    const cutterData = RES.getRes('cutter_json');
+    const cutterImg = RES.getRes('cutter_png');
+    const mcFactory = new egret.MovieClipDataFactory(cutterData, cutterImg);
+    this.cutter = new egret.MovieClip(mcFactory.generateMovieClipData('cutter'));
     this.addChild(this.cutter);
+    this.cutter.gotoAndStop(1);
+    this.cutter.x = this.tree.x - this.cutter.width;
+    this.cutter.y = Const.HEIGHT * 0.88 - this.cutter.height;
   }
 
   // 获取一根树枝
-  private _getOneBranch(y: number = 0, defaultRect?: eui.Rect) {
-    let rect = defaultRect || new eui.Rect(150, 40, 0xf57f7f);
-    rect.x = Math.random() > 0.5 ? (Const.WIDTH / 2 - 100 - rect.width) : Const.WIDTH / 2 + 100;
-    rect.y = y;
-    return rect;
+  private _getOneBranch(y: number = 0, defaultRect?: eui.Image) {
+    let branch = defaultRect || new eui.Image();
+    const random = Math.random();
+
+    if (random > 0.5) {
+      branch.texture = RES.getRes('branch_left_png');
+      branch.x = this.tree.x - branch.width + 100;
+    } else {
+      branch.texture = RES.getRes('branch_right_png');
+      branch.x = this.tree.x + this.tree.width - 60;
+    }
+    branch.y = y;
+    return branch;
   }
 
   // 初始化树枝
@@ -170,9 +191,9 @@ class GameScene extends SceneBase {
     }
     this.timer = egret.Tween.get(this.timeBar);
     this.timer.to({
-      width: 0
+      x: - this.timeBar.width
     }, this.curTime * 1000).call(() => {
-      // this.gameOver();
+      this.gameOver();
     });
   }
 
@@ -196,9 +217,9 @@ class GameScene extends SceneBase {
   //处理点击时时间增加相关
   private _handleTimeAdd() {
     this.timer.setPaused(true);
-    const onclikAddDis = this.curLong / this.curTime / 6;
-    const TimeBarWidth = this.timeBar.width;
-    this.timeBar.width = TimeBarWidth + onclikAddDis > this.curLong ? this.curLong : TimeBarWidth + onclikAddDis;
+    const onclikAddDis = this.timeBar.width / this.curTime / 6;
+    const timeBarX = this.timeBar.x;
+    this.timeBar.x = timeBarX + onclikAddDis > 0 ? 0 : timeBarX + onclikAddDis;
     this._createTimerEvent();
   }
 
@@ -237,47 +258,47 @@ class GameScene extends SceneBase {
 
   // 砍树人的动画处理
   private animationCutter(flag: boolean = false) {
-    let ratotion = 30;
-    if (flag) ratotion = -30;
-    let tCutter = egret.Tween.get(this.cutter)
-    tCutter.wait(10);
-    tCutter.to({
-      rotation: ratotion
-    }, 30).to({
-      rotation: 0
-    }, 30)
+    if (flag) {
+      this.cutter.x = this.tree.x - this.cutter.width;
+      this.cutter.gotoAndPlay('cut_l', 1);
+    } else {
+      this.cutter.x = this.tree.x + this.tree.width - 60;
+      this.cutter.gotoAndPlay('cut_r', 1);
+    }
     this._cutedTreeMove(flag);
   }
 
   // 被砍的树块生成与动画
   private _cutedTreeMove(flag: boolean = false) {
-    let rect = new eui.Rect(this.tree.width, 150, 0x832466);
-    rect.anchorOffsetX = rect.width / 2;
-    rect.x = Const.WIDTH / 2;
-    rect.y = this.cutter.y + 20;
-    this.addChild(rect);
-    let tw = egret.Tween.get(rect);
+    let wood = new eui.Image();
+    wood.texture = RES.getRes('wood_png');
+    wood.anchorOffsetX = wood.width / 2;
+    wood.x = Const.WIDTH / 2;
+    wood.y = this.cutter.y + 20;
+    this.addChild(wood);
+
+    let tw = egret.Tween.get(wood);
     tw.to({
       rotation: flag ? 90 : -90,
-      x: flag ? Const.WIDTH + rect.width : - rect.width
-    }, 500).call(() => { rect = null });
+      x: flag ? Const.WIDTH + wood.height : - wood.height
+    }, 500).call(() => { wood = null });
 
     let lineRect = new eui.Rect(0, 2, 0xffffff);
-    lineRect.y = rect.y + rect.height;
-    lineRect.x = (Const.WIDTH - this.tree.width) / 2;
+    lineRect.y = Const.HEIGHT * 0.78;
+    lineRect.x = this.tree.x + 100;
 
     this.addChild(lineRect);
     let lintTw = egret.Tween.get(lineRect)
     if (flag) {
       lintTw.to({
-        width: this.tree.width,
+        width: this.tree.width - 160,
         alpha: 0
       }, 200).call(() => { lineRect = null })
     } else {
-      lineRect.x = (Const.WIDTH - this.tree.width) / 2 + this.tree.width / 2;
+      lineRect.x = this.tree.x + this.tree.width - 60;
       lintTw.to({
-        x: (Const.WIDTH - this.tree.width) / 2,
-        width: this.tree.width,
+        x: this.tree.x + 100,
+        width: this.tree.width - 160,
         alpha: 0
       }, 200).call(() => { lineRect = null })
     }
@@ -290,7 +311,6 @@ class GameScene extends SceneBase {
     const uuu = new Date().getTime()
     if (this._curTime) {
       const detTime = uuu - this._curTime;
-      console.log(detTime);
       this.label.text = detTime.toString();
 
     }
@@ -327,9 +347,11 @@ class GameScene extends SceneBase {
     const label = new eui.Label('游戏结束');
     label.width = this.cutter.width;
     label.textColor = 0xff0000;
-    this.cutter.addChild(label);
+    // this.cutter.addChild(label);
     // this.ScoreLabel.text = (--this.score).toString();
-    if (this.timer) this.timer.setPaused(true);
+    if (this.timer) {
+      this.timer.setPaused(true);
+    }
 
     //设置最高分
     const MaxScore = Number(egret.localStorage.getItem('MAX_SCORE'));

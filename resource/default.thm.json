@@ -3,9 +3,9 @@
 	"autoGenerateExmlsList": true,
 	"exmls": [
 		"resource/skin/ButtonSkin.exml",
+		"resource/skin/button/ButtonPlay.exml",
 		"resource/skin/scene/GameScene.exml",
-		"resource/skin/scene/WelcomeScene.exml",
-		"resource/skin/button/ButtonPlay.exml"
+		"resource/skin/scene/WelcomeScene.exml"
 	],
 	"path": "resource/default.thm.json"
 }

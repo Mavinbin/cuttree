@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "button_down_png,button_up_png,btn_left_png,btn_pasue_png,btn_play_png,btn_rank_png,btn_resume_png,btn_right_png,bg_main_jpg,bg_start_jpg,branch_left_png,branch_right_png,wood_png,trunk_png,title_png,timebar_inner_png,timebar_wrap_png,icon_jpg,cutter_json,cutter_png,panel_over_png",
+			"keys": "btn_left_png,btn_pasue_png,btn_play_png,btn_rank_png,btn_resume_png,btn_right_png,bg_main_jpg,bg_start_jpg,branch_left_png,branch_right_png,wood_png,trunk_png,title_png,timebar_inner_png,timebar_wrap_png,icon_jpg,cutter_json,cutter_png,panel_over_png,score_font_png,score_font_fnt,jinhei_fnt,jinhei_png,updown_json,updown_png",
 			"name": "preload"
 		},
 		{
@@ -10,16 +10,6 @@
 		}
 	],
 	"resources": [
-		{
-			"url": "assets/Button/button_down.png",
-			"type": "image",
-			"name": "button_down_png"
-		},
-		{
-			"url": "assets/Button/button_up.png",
-			"type": "image",
-			"name": "button_up_png"
-		},
 		{
 			"url": "assets/Button/btn_left.png",
 			"type": "image",
@@ -114,6 +104,36 @@
 			"name": "panel_over_png",
 			"type": "image",
 			"url": "assets/layout/panel_over.png"
+		},
+		{
+			"name": "score_font_png",
+			"type": "image",
+			"url": "assets/font/score_font.png"
+		},
+		{
+			"name": "score_font_fnt",
+			"type": "font",
+			"url": "assets/font/score_font.fnt"
+		},
+		{
+			"name": "jinhei_fnt",
+			"type": "font",
+			"url": "assets/font/jinhei.fnt"
+		},
+		{
+			"name": "jinhei_png",
+			"type": "image",
+			"url": "assets/font/jinhei.png"
+		},
+		{
+			"name": "updown_json",
+			"type": "json",
+			"url": "assets/animation/updown.json"
+		},
+		{
+			"name": "updown_png",
+			"type": "image",
+			"url": "assets/animation/updown.png"
 		}
 	]
 }

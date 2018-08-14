@@ -1,0 +1,42 @@
+{
+	"mc": {
+		"updown": {
+			"frameRate": 8,
+			"labels": [
+				{
+					"name": "updown",
+					"frame": 1,
+					"end": 3
+				}
+			],
+			"events": [],
+			"frames": [
+				{
+					"res": "B3BE3A4B",
+					"x": 24,
+					"y": 12
+				},
+				{
+					"res": "A9EDA362",
+					"x": 12,
+					"y": 28,
+					"duration": 2
+				}
+			]
+		}
+	},
+	"res": {
+		"A9EDA362": {
+			"x": 1,
+			"y": 1,
+			"w": 178,
+			"h": 260
+		},
+		"B3BE3A4B": {
+			"x": 181,
+			"y": 1,
+			"w": 165,
+			"h": 275
+		}
+	}
+}

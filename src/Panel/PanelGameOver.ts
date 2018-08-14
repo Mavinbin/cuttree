@@ -1,6 +1,6 @@
 class PanelGameOver extends PanelBase {
-    public curScore: eui.Label;
-    public MaxScore: eui.Label;
+    public curScore: eui.BitmapLabel;
+    public MaxScore: eui.BitmapLabel;
 
 
     public constructor() {
@@ -33,63 +33,47 @@ class PanelGameOver extends PanelBase {
         popComponent.addChild(gameoverLayer);
 
         //本轮得分文字
-        let curLabelText = new eui.Label('本轮得分 ：');
+        let curLabelText = new eui.BitmapLabel;
+        curLabelText.text = '本轮分数 ：';
         curLabelText.x = 20;
         curLabelText.y = 280;
-        curLabelText.size = 40;
         curLabelText.width = popComponent.width / 2;
-        // curLabelText.height = 40;
         curLabelText.textAlign = egret.HorizontalAlign.RIGHT;
-        curLabelText.fontFamily = "microsoft yahei";
-        curLabelText.stroke = 1;
-        curLabelText.strokeColor = 0x3a230a;
+        curLabelText.verticalAlign = 'middle';
+        curLabelText.font = 'jinhei_fnt';
         popComponent.addChild(curLabelText);
 
 
         // 本轮得分分数
-        this.curScore = new eui.Label;
+        this.curScore = new eui.BitmapLabel;
         this.curScore.text = '190';
-        this.curScore.bold = true;
-        this.curScore.x = popComponent.width / 2 + 10;
+        this.curScore.x = popComponent.width / 2 + 50;
         this.curScore.y = curLabelText.y;
-        this.curScore.textColor = 0xff0000;
-        this.curScore.size = 40;
         this.curScore.width = popComponent.width / 2;
-        // this.curScore.height = 35;
         this.curScore.textAlign = egret.HorizontalAlign.LEFT;
-        this.curScore.fontFamily = "microsoft yahei";
-        this.curScore.stroke = 1;
-        this.curScore.strokeColor = 0x3a230a;
+        this.curScore.font = 'jinhei_fnt';
         popComponent.addChild(this.curScore);
 
 
         //最高得分文本
-        let maxLabelText = new eui.Label('最高得分 ：');
+        let maxLabelText = new eui.BitmapLabel;
+        maxLabelText.text = '最高分数 ：';
         maxLabelText.x = 20;
         maxLabelText.y = curLabelText.y + curLabelText.height + 60;
-        maxLabelText.size = 40;
         maxLabelText.width = popComponent.width / 2;
-        // maxLabelText.height = 40;
         maxLabelText.textAlign = egret.HorizontalAlign.RIGHT;
-        maxLabelText.fontFamily = "microsoft yahei";
-        maxLabelText.stroke = 1;
-        maxLabelText.strokeColor = 0x3a230a;
+        maxLabelText.verticalAlign = 'middle';
+        maxLabelText.font = 'jinhei_fnt';
         popComponent.addChild(maxLabelText);
 
         // 最高得分分数
-        this.MaxScore = new eui.Label;
+        this.MaxScore = new eui.BitmapLabel;
         this.MaxScore.text = '500';
-        this.MaxScore.bold = true;
-        this.MaxScore.x = popComponent.width / 2 + 10;
+        this.MaxScore.x = popComponent.width / 2 + 50;
         this.MaxScore.y = maxLabelText.y;
-        this.MaxScore.textColor = 0xff0000;
-        this.MaxScore.size = 40;
         this.MaxScore.width = popComponent.width / 2;
-        // this.MaxScore.height = 35;
         this.MaxScore.textAlign = egret.HorizontalAlign.LEFT;
-        this.MaxScore.fontFamily = "microsoft yahei";
-        this.MaxScore.stroke = 1;
-        this.MaxScore.strokeColor = 0x3a230a;
+        this.MaxScore.font = 'jinhei_fnt';
         popComponent.addChild(this.MaxScore);
 
         //确定按钮

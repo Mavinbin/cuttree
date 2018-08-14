@@ -29,7 +29,6 @@ var GameScene = (function (_super) {
         this._initView();
         this._initEvent();
         this._start();
-        this.gameOver();
     };
     // 初始化数据
     GameScene.prototype._initData = function () {
@@ -37,7 +36,9 @@ var GameScene = (function (_super) {
         this.level = 0;
         this.curTime = 10;
         this.isPause = false;
-        this.curLong = Const.WIDTH - 150;
+        if (this.timeBar) {
+            this.timeBar.x = 0;
+        }
         if (this.timer)
             this.timer.setPaused(true);
         this.timer = null;
@@ -93,15 +94,12 @@ var GameScene = (function (_super) {
     };
     GameScene.prototype._createScore = function () {
         if (!this.ScoreLabel) {
-            this.ScoreLabel = new eui.Label();
-            this.ScoreLabel.width = this.tree.width;
-            this.ScoreLabel.anchorOffsetX = this.ScoreLabel.width / 2;
-            this.ScoreLabel.x = this.tree.x;
-            this.ScoreLabel.y = 300;
-            this.ScoreLabel.height = 45;
-            this.ScoreLabel.size = 36;
+            this.ScoreLabel = new eui.BitmapLabel();
+            this.ScoreLabel.font = RES.getRes('score_font_fnt');
+            this.ScoreLabel.width = Const.WIDTH / 2;
+            this.ScoreLabel.x = this.tree.x + (this.tree.width - 160 - this.ScoreLabel.width) / 2 + 100;
+            this.ScoreLabel.y = Const.HEIGHT * 0.34;
             this.ScoreLabel.textAlign = egret.HorizontalAlign.CENTER;
-            this.ScoreLabel.textColor = 0xff8930;
             this.addChild(this.ScoreLabel);
         }
         this.ScoreLabel.text = this.score.toString();
@@ -215,19 +213,17 @@ var GameScene = (function (_super) {
         this._levelUpAnimation();
     };
     GameScene.prototype._levelUpAnimation = function () {
-        this.levelLabel = this.levelLabel || new eui.Label();
+        this.levelLabel = this.levelLabel || new eui.BitmapLabel();
+        this.levelLabel.font = 'jinhei_fnt';
+        this.levelLabel.text = 'Level ' + this.level.toString();
         this.levelLabel.alpha = 1;
-        this.levelLabel.text = this.level.toString();
-        this.levelLabel.size = 60;
-        this.levelLabel.width = this.tree.width;
-        this.levelLabel.height = 80;
+        this.levelLabel.width = Const.WIDTH / 2;
         this.levelLabel.verticalAlign = egret.VerticalAlign.MIDDLE;
         this.levelLabel.textAlign = egret.HorizontalAlign.CENTER;
         this.levelLabel.anchorOffsetX = this.levelLabel.width / 2;
         this.levelLabel.anchorOffsetY = this.levelLabel.height / 2;
-        this.levelLabel.x = Const.WIDTH / 2;
-        this.levelLabel.y = 400 + this.levelLabel.height / 2;
-        this.levelLabel.textColor = 0x890239;
+        this.levelLabel.x = this.tree.x + (this.tree.width - 160) / 2 + 100;
+        this.levelLabel.y = Const.HEIGHT * 0.22;
         egret.Tween.get(this.levelLabel).to({
             scaleX: 1.3,
             scaleY: 1.3

@@ -108,6 +108,6 @@ class Main extends eui.UILayer {
         Const.MAXSCORE = Number(egret.localStorage.getItem('MAX_SCORE') || 0);
 
         GameLayerManager.instance.init(this);
-        SceneManager.instance.runScene(GameScene);      
+        SceneManager.instance.runScene(WelcomeScene);      
     }
 }

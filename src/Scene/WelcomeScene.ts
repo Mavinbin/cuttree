@@ -1,6 +1,7 @@
 class WelcomeScene extends SceneBase {
     public group: eui.Group;
     private startGameButton: eui.Button;
+    private tree: eui.Image;
     public button: eui.Button;
     public constructor() {
         super();
@@ -18,6 +19,8 @@ class WelcomeScene extends SceneBase {
     }
 
     private _initView() {
+        this._createTree();
+        this._createCutter();
         this._createInfo();
         this._createButton();
     }
@@ -58,5 +61,25 @@ class WelcomeScene extends SceneBase {
         this.group.addChild(this.startGameButton);
 
         UIUtils.addButtonScaleEffects(this.startGameButton);
+    }
+
+    private _createTree() {
+        this.tree = new eui.Image();
+        this.tree.texture = RES.getRes('tree_png');
+        this.tree.x = (Const.WIDTH - this.tree.width) / 2;
+        const y = Const.HEIGHT * 0.88 - this.tree.height;
+        this.tree.y = y < 0 ? y : 0;
+        this.group.addChild(this.tree);
+    }
+
+    private _createCutter() {
+        const cutterData = RES.getRes('updown_json');
+        const cutterImg = RES.getRes('updown_png');
+        const mcFactory = new egret.MovieClipDataFactory(cutterData, cutterImg);
+        let cutter = new egret.MovieClip(mcFactory.generateMovieClipData('cutter'));
+        cutter.x = this.tree.x - cutter.width + 100;
+        cutter.y = Const.HEIGHT * 0.88 - cutter.height;
+        this.group.addChild(cutter);
+        cutter.gotoAndPlay('updown', -1);
     }
 }

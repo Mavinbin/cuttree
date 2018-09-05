@@ -40,19 +40,25 @@ var LoadingUI = (function (_super) {
     __extends(LoadingUI, _super);
     function LoadingUI() {
         var _this = _super.call(this) || this;
-        _this.createView();
+        // this.createView();
+        _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.createView, _this);
         return _this;
     }
     LoadingUI.prototype.createView = function () {
-        this.textField = new egret.TextField();
+        Const.stage = this.stage;
+        Const.WIDTH = this.stage.stageWidth;
+        Const.HEIGHT = this.stage.stageHeight;
+        this.textField = new eui.BitmapLabel();
         this.addChild(this.textField);
-        this.textField.y = 300;
-        this.textField.width = 480;
-        this.textField.height = 100;
-        this.textField.textAlign = "center";
+        this.textField.font = 'jinhei_fnt';
+        this.textField.text = 'Loading...0%';
+        this.textField.width = Const.WIDTH;
+        this.textField.textAlign = egret.HorizontalAlign.CENTER;
+        // this.textField.x = (Const.WIDTH - this.textField.width) / 2;
+        this.textField.y = (Const.HEIGHT - this.textField.height) / 2;
     };
     LoadingUI.prototype.onProgress = function (current, total) {
-        this.textField.text = "Loading..." + current + "/" + total;
+        this.textField.text = "Loading..." + Math.ceil(current / total) * 100 + "%";
     };
     return LoadingUI;
 }(egret.Sprite));

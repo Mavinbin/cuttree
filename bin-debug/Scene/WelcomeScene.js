@@ -24,6 +24,8 @@ var WelcomeScene = (function (_super) {
         this._initEvent();
     };
     WelcomeScene.prototype._initView = function () {
+        this._createTree();
+        this._createCutter();
         this._createInfo();
         this._createButton();
     };
@@ -59,6 +61,24 @@ var WelcomeScene = (function (_super) {
         this.startGameButton.y = Const.HEIGHT - 421 + this.startGameButton.height / 2;
         this.group.addChild(this.startGameButton);
         UIUtils.addButtonScaleEffects(this.startGameButton);
+    };
+    WelcomeScene.prototype._createTree = function () {
+        this.tree = new eui.Image();
+        this.tree.texture = RES.getRes('tree_png');
+        this.tree.x = (Const.WIDTH - this.tree.width) / 2;
+        var y = Const.HEIGHT * 0.88 - this.tree.height;
+        this.tree.y = y < 0 ? y : 0;
+        this.group.addChild(this.tree);
+    };
+    WelcomeScene.prototype._createCutter = function () {
+        var cutterData = RES.getRes('updown_json');
+        var cutterImg = RES.getRes('updown_png');
+        var mcFactory = new egret.MovieClipDataFactory(cutterData, cutterImg);
+        var cutter = new egret.MovieClip(mcFactory.generateMovieClipData('cutter'));
+        cutter.x = this.tree.x - cutter.width + 100;
+        cutter.y = Const.HEIGHT * 0.88 - cutter.height;
+        this.group.addChild(cutter);
+        cutter.gotoAndPlay('updown', -1);
     };
     return WelcomeScene;
 }(SceneBase));

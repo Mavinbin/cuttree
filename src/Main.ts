@@ -72,9 +72,10 @@ class Main extends eui.UILayer {
 
     private async loadResource() {
         try {
+            await RES.loadConfig("resource/default.res.json", "resource/");
+            await RES.loadGroup('loading');
             const loadingView = new LoadingUI();
             this.stage.addChild(loadingView);
-            await RES.loadConfig("resource/default.res.json", "resource/");
             await this.loadTheme();
             await RES.loadGroup("preload", 0, loadingView);
             this.stage.removeChild(loadingView);
@@ -102,9 +103,6 @@ class Main extends eui.UILayer {
      * Create scene interface
      */
     protected createGameScene(): void {
-        Const.stage = this.stage;
-        Const.WIDTH = this.stage.stageWidth;
-        Const.HEIGHT = this.stage.stageHeight;
         Const.MAXSCORE = Number(egret.localStorage.getItem('MAX_SCORE') || 0);
 
         GameLayerManager.instance.init(this);

@@ -108,7 +108,7 @@ class GameScene extends SceneBase {
   private _createScore() {
     if (!this.ScoreLabel) {
       this.ScoreLabel = new eui.BitmapLabel();
-      this.ScoreLabel.font = RES.getRes('score_font_fnt');
+      this.ScoreLabel.font = 'score_font_fnt';
       this.ScoreLabel.width = Const.WIDTH / 2;
       this.ScoreLabel.x = this.tree.x + (this.tree.width - 160 - this.ScoreLabel.width) / 2 + 100;
       this.ScoreLabel.y = Const.HEIGHT * 0.34;

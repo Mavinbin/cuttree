@@ -6,6 +6,7 @@ class GameScene extends SceneBase {
   public timeBar: eui.Image;
   public levelLabel: eui.BitmapLabel;
   public overPanel: PanelGameOver;
+  public guideGroup: eui.Group;
   public branchs: Array<eui.Image> = [];
   public constructor() {
     super();
@@ -31,9 +32,55 @@ class GameScene extends SceneBase {
     this._initData();
     this._initView();
     this._initEvent();
-    this._start();
   }
 
+  // 初始化引导界面
+  private _initGuide() {
+    let leftButton = new eui.Image;
+    leftButton.texture = RES.getRes('btn_left_png');
+
+    let rightButton = new eui.Image;
+    rightButton.texture = RES.getRes('btn_right_png');
+
+    const maxDistance = 200;
+    const minDistance = 50;
+    const duration = 800;
+    leftButton.x = maxDistance;
+    leftButton.y = rightButton.y = Const.HEIGHT - 50 - leftButton.height;
+    rightButton.x = Const.WIDTH - maxDistance - rightButton.width;
+
+    let slideLeft = egret.Tween.get(leftButton, {
+      loop: true
+    });
+    slideLeft.to({
+      x: minDistance
+    }, duration).to({
+      x: maxDistance
+    }, duration);
+
+    let slideRight = egret.Tween.get(rightButton, {
+      loop: true
+    });
+    slideRight.to({
+      x: Const.WIDTH - minDistance - rightButton.width
+    }, duration).to({
+      x: Const.WIDTH - maxDistance - rightButton.width
+    }, duration);
+
+    this.guideGroup = new eui.Group;
+    this.guideGroup.addChild(leftButton);
+    this.guideGroup.addChild(rightButton);
+    this.addChild(this.guideGroup);
+
+    this.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+      this._start(); 
+
+      if (this.guideGroup) {
+        this.removeChild(this.guideGroup);
+        this.guideGroup = null;
+      }
+    }, this);
+  }
 
   // 初始化数据
   private _initData() {
@@ -46,7 +93,9 @@ class GameScene extends SceneBase {
       this.timeBar.x = 0;
     }
 
-    if (this.timer) this.timer.setPaused(true);
+    if (this.timer) {
+      this.timer.setPaused(true);
+    }
     this.timer = null;
   }
 
@@ -58,6 +107,7 @@ class GameScene extends SceneBase {
     this._initBranch();
     this._createScore();
     this._initTimeBar();
+    this._initGuide();
     this.label = new eui.Label;
     this.label.backgroundColor = 0xff0000;
     this.label.width = Const.WIDTH / 2;
@@ -216,7 +266,9 @@ class GameScene extends SceneBase {
 
   //处理点击时时间增加相关
   private _handleTimeAdd() {
-    this.timer.setPaused(true);
+    if (this.timer) {
+      this.timer.setPaused(true);
+    }
     const onclikAddDis = this.timeBar.width / this.curTime / 6;
     const timeBarX = this.timeBar.x;
     this.timeBar.x = timeBarX + onclikAddDis > 0 ? 0 : timeBarX + onclikAddDis;

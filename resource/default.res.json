@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "btn_left_png,btn_pasue_png,btn_play_png,btn_rank_png,btn_resume_png,btn_right_png,bg_main_jpg,bg_start_jpg,branch_left_png,branch_right_png,wood_png,trunk_png,title_png,timebar_inner_png,timebar_wrap_png,icon_jpg,cutter_json,cutter_png,panel_over_png,score_font_png,score_font_fnt,jinhei_fnt,jinhei_png,updown_json,updown_png,tree_png",
+			"keys": "btn_left_png,btn_pasue_png,btn_play_png,btn_rank_png,btn_resume_png,btn_right_png,bg_main_jpg,bg_start_jpg,branch_left_png,branch_right_png,wood_png,trunk_png,title_png,timebar_inner_png,timebar_wrap_png,icon_jpg,cutter_json,cutter_png,panel_over_png,score_font_png,score_font_fnt,jinhei_fnt,jinhei_png,updown_json,updown_png,tree_png,btn_left2_png,btn_pasue2_png,btn_play2_png,btn_rank2_png,btn_resume2_png,btn_right2_png,btn_left3_png,btn_pasue3_png,btn_play3_png,btn_rank3_png,btn_resume3_png,btn_right3_png,btn_left4_png,btn_pasue4_png,btn_play4_png,btn_rank4_png,btn_resume4_png,btn_right4_png,btn_left5_png,btn_pasue5_png,btn_play5_png,btn_rank5_png,btn_resume5_png,btn_right5_png,btn_help_png,panel_help_png,btn_confirm_png",
 			"name": "preload"
 		},
 		{
@@ -143,6 +143,151 @@
 			"url": "assets/tree/tree.png",
 			"type": "image",
 			"name": "tree_png"
+		},
+		{
+			"url": "assets/Button/btn_left.png",
+			"type": "image",
+			"name": "btn_left2_png"
+		},
+		{
+			"url": "assets/Button/btn_pasue.png",
+			"type": "image",
+			"name": "btn_pasue2_png"
+		},
+		{
+			"url": "assets/Button/btn_play.png",
+			"type": "image",
+			"name": "btn_play2_png"
+		},
+		{
+			"url": "assets/Button/btn_rank.png",
+			"type": "image",
+			"name": "btn_rank2_png"
+		},
+		{
+			"url": "assets/Button/btn_resume.png",
+			"type": "image",
+			"name": "btn_resume2_png"
+		},
+		{
+			"url": "assets/Button/btn_right.png",
+			"type": "image",
+			"name": "btn_right2_png"
+		},
+		{
+			"url": "assets/button/btn_left.png",
+			"type": "image",
+			"name": "btn_left3_png"
+		},
+		{
+			"url": "assets/button/btn_pasue.png",
+			"type": "image",
+			"name": "btn_pasue3_png"
+		},
+		{
+			"url": "assets/button/btn_play.png",
+			"type": "image",
+			"name": "btn_play3_png"
+		},
+		{
+			"url": "assets/button/btn_rank.png",
+			"type": "image",
+			"name": "btn_rank3_png"
+		},
+		{
+			"url": "assets/button/btn_resume.png",
+			"type": "image",
+			"name": "btn_resume3_png"
+		},
+		{
+			"url": "assets/button/btn_right.png",
+			"type": "image",
+			"name": "btn_right3_png"
+		},
+		{
+			"url": "assets/Button/btn_left.png",
+			"type": "image",
+			"name": "btn_left4_png"
+		},
+		{
+			"url": "assets/Button/btn_pasue.png",
+			"type": "image",
+			"name": "btn_pasue4_png"
+		},
+		{
+			"url": "assets/Button/btn_play.png",
+			"type": "image",
+			"name": "btn_play4_png"
+		},
+		{
+			"url": "assets/Button/btn_rank.png",
+			"type": "image",
+			"name": "btn_rank4_png"
+		},
+		{
+			"url": "assets/Button/btn_resume.png",
+			"type": "image",
+			"name": "btn_resume4_png"
+		},
+		{
+			"url": "assets/Button/btn_right.png",
+			"type": "image",
+			"name": "btn_right4_png"
+		},
+		{
+			"url": "assets/Button/help.png",
+			"type": "image",
+			"name": "help2_png"
+		},
+		{
+			"url": "assets/Button/rank.png",
+			"type": "image",
+			"name": "rank2_png"
+		},
+		{
+			"url": "assets/button/btn_left.png",
+			"type": "image",
+			"name": "btn_left5_png"
+		},
+		{
+			"url": "assets/button/btn_pasue.png",
+			"type": "image",
+			"name": "btn_pasue5_png"
+		},
+		{
+			"url": "assets/button/btn_play.png",
+			"type": "image",
+			"name": "btn_play5_png"
+		},
+		{
+			"url": "assets/button/btn_rank.png",
+			"type": "image",
+			"name": "btn_rank5_png"
+		},
+		{
+			"url": "assets/button/btn_resume.png",
+			"type": "image",
+			"name": "btn_resume5_png"
+		},
+		{
+			"url": "assets/button/btn_right.png",
+			"type": "image",
+			"name": "btn_right5_png"
+		},
+		{
+			"url": "assets/button/btn_help.png",
+			"type": "image",
+			"name": "btn_help_png"
+		},
+		{
+			"name": "panel_help_png",
+			"type": "image",
+			"url": "assets/layout/panel_help.png"
+		},
+		{
+			"name": "btn_confirm_png",
+			"type": "image",
+			"url": "assets/button/btn_confirm.png"
 		}
 	]
 }

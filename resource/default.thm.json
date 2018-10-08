@@ -3,7 +3,10 @@
 	"autoGenerateExmlsList": true,
 	"exmls": [
 		"resource/skin/ButtonSkin.exml",
+		"resource/skin/button/ButtonConfirm.exml",
+		"resource/skin/button/ButtonHelp.exml",
 		"resource/skin/button/ButtonPlay.exml",
+		"resource/skin/button/ButtonRank.exml",
 		"resource/skin/scene/GameScene.exml",
 		"resource/skin/scene/WelcomeScene.exml"
 	],

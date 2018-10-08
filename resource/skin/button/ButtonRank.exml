@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin xmlns:e="http://ns.egret.com/eui">
+    <e:Image source="btn_rank_png" width="145" height="146" x="0" y="0" anchorOffsetX="0" anchorOffsetY="0"></e:Image>
+</e:Skin>
